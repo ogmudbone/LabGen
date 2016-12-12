@@ -23,7 +23,7 @@ public class HtmlRenderer {
         preprocessHandler = new PreprocessHandler(rootPath);
     }
 
-    public void render(String input, String outPath){
+    public void render(String input, String outPath, String debugHtmlPath){
 
         String processedHtml = preprocessHandler.processRoot(input);
 
@@ -41,9 +41,11 @@ public class HtmlRenderer {
 
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
-            FileOutputStream stream = new FileOutputStream("lol.html");
-            stream.write(processedHtml.getBytes());
-            stream.close();
+            if(debugHtmlPath != null) {
+                FileOutputStream stream = new FileOutputStream(debugHtmlPath);
+                stream.write(processedHtml.getBytes());
+                stream.close();
+            }
 
             Document doc = builder.parse(
                     new InputSource(new StringReader(processedHtml))

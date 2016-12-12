@@ -18,9 +18,10 @@ public class Main
 
             String rootPath = docPath.substring(0, index);
             String docRelativePath = docPath.substring(index + 1);
+            String debugHtmlPath = args.length >= 3 ? args[2] : null;
 
             HtmlRenderer renderer = new HtmlRenderer(rootPath);
-            renderer.render(docRelativePath, outPath);
+            renderer.render(docRelativePath, outPath, debugHtmlPath);
         }
         else
             System.err.print("Invalid program arguments");
